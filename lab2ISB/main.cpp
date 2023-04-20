@@ -109,6 +109,15 @@ float TestForTheLongestSequenceOfOnesInBlock(std::vector<int>& seq) {
 }
 
 int main(int argc, const char * argv[]) {
-    
+    std::vector<int> binseq;
+    binseq = GetSubsequence();
+    std::cout << std::endl;
+    double first_test = FrequencyBitTest(binseq);
+    std::cout << "First test: " << first_test << std::endl;
+    double second_test = TestForIdenticalConsecutiveBits(binseq);
+    std::cout << "Second test: " << second_test << std::endl;
+    double x2 = TestForTheLongestSequenceOfOnesInBlock(binseq);
+    std::cout << "Xu: " << x2 << std::endl;
+    std::cout << "Third test (result from online calculator): " << 0.277069 << std::endl;
     return 0;
 }
