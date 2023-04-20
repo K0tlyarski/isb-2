@@ -70,6 +70,43 @@ float TestForIdenticalConsecutiveBits(std::vector<int>& seq) {
     return res;
 }
 
+float TestForTheLongestSequenceOfOnesInBlock(std::vector<int>& seq) {
+    unsigned long N = seq.size(), M = 8;
+    int index = 0;
+    std::vector<int> count_ones;
+    while (index != 128) {
+        std::vector<int> tmp;
+        for (int i = index; i < index + 8; ++i) {
+            tmp.push_back(seq[i]);
+        }
+        int len = 0, count = 0, max = 0;
+        for (auto i : tmp) {
+            if (i == 1) ++count;
+            else {
+                if (count > max) max = count;
+                count = 0;
+            }
+        }
+        len = max;
+        count_ones.push_back(len);
+        index += 8;
+    }
+
+    int v1 = 0, v2 = 0, v3 = 0, v4 = 0;
+    for (auto i : count_ones) {
+        if (i <= 1) ++v1;
+        if (i == 2) ++v2;
+        if (i == 3) ++v3;
+        if (i >= 4) ++v4;
+    }
+    std::vector<int> v = { v1, v2, v3, v4 };
+    std::vector<double> p = { 0.2148, 0.3672, 0.2305, 0.1875 };
+    float x2 = 0;
+    for (int i = 0; i < 4; ++i) {
+        x2 += (pow((v[i] - 16 * p[i]), 2) / (16 * p[i]));
+    }
+    return x2;
+}
 
 int main(int argc, const char * argv[]) {
     
