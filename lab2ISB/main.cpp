@@ -38,6 +38,21 @@ std::vector<int>GetSubsequence (){
     return res;
 }
 
+float FrequencyBitTest(std::vector<int>& sequence) {
+    float sum = 0;
+    for (int i = 0; i < sequence.size(); ++i) {
+        if (sequence[i] == 1)
+            ++sum;
+        else
+            --sum;
+    }
+    sum = sum / sqrt(sequence.size());
+    float res = erfc(sum / sqrt(2));
+    return res;
+}
+
+
+
 int main(int argc, const char * argv[]) {
     
     return 0;
